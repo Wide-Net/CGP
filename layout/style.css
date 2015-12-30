@@ -97,6 +97,7 @@ a:hover {
 .row .field {
 	float: left;
 	width: 3.4em;
+     	white-space: nowrap;
 }
 
 .row .field.wide {

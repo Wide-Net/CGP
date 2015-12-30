@@ -307,6 +307,41 @@ function host_summary($cat, $hosts) {
 			}
 		}
 
+                if ($CONFIG['showamp']) {
+                        $rrd_info = $rrd->rrd_info($CONFIG['datadir'].'/'.$host.'/snmp/gauge-Load Ampere.rrd');
+                        if ($rrd_info) {
+                                $info='ds[value].last_ds';
+                                $amp = $rrd_info[$info];
+
+                                $class = '';
+                                if ($amp > 5)
+                                        $class .= ' crit';
+                                elseif ($amp > 4)
+                                        $class .= ' warn';
+
+                                printf('<div class="field %s">%.2f A</div>',
+                                        $class, $amp);
+                        }
+                }
+
+                if ($CONFIG['showatt']) {
+                        $rrd_info = $rrd->rrd_info($CONFIG['datadir'].'/'.$host.'/snmp/power-Power Watts.rrd');
+                        if ($rrd_info) {
+                                $info='ds[value].last_ds';
+                                $amp = $rrd_info[$info];
+
+                                $class = '';
+                                if ($amp > 1000)
+                                        $class .= ' crit';
+                                elseif ($amp > 500)
+                                        $class .= ' warn';
+
+                                printf('<div class="field %s">%d Watt</div>',
+                                        $class, $amp);
+
+                        }
+                }
+
 		print "</div></div>\n";
 	}
 

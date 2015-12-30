@@ -4,7 +4,7 @@
 $CONFIG['version'] = 5;
 
 # collectd's datadir
-$CONFIG['datadir'] = '/var/lib/collectd/rrd';
+$CONFIG['datadir'] = '/var/lib/collectd';
 
 # location of the types.db file
 $CONFIG['typesdb'][] = '/usr/share/collectd/types.db';
@@ -19,7 +19,7 @@ $CONFIG['rrdtool_opts'] = array();
 #$CONFIG['cat']['category1'] = array('host1', 'host2');
 
 # default plugins to show on host page
-$CONFIG['overview'] = array('load', 'cpu', 'memory', 'swap');
+$CONFIG['overview'] = array('load', 'cpu', 'memory', 'swap', 'snmp');
 
 # example of filter to show only the if_octets of eth0 on host page
 # (interface must be enabled in the overview config array)
@@ -31,8 +31,10 @@ $CONFIG['time_range']['uptime']  = 31536000;
 
 # show load averages and used memory on overview page
 $CONFIG['showload'] = true;
-$CONFIG['showmem'] = false;
-$CONFIG['showtime'] = false;
+$CONFIG['showmem'] = true;
+$CONFIG['showtime'] = true;
+$CONFIG['showamp'] = true;
+$CONFIG['showatt'] = true;
 
 $CONFIG['term'] = array(
 	'2hour'	 => 3600 * 2,
@@ -45,7 +47,7 @@ $CONFIG['term'] = array(
 );
 
 # show graphs in bits or bytes
-$CONFIG['network_datasize'] = 'bytes';
+$CONFIG['network_datasize'] = 'bits';
 
 # "png", "svg", "canvas" or "hybrid" (canvas on detail page, png on the others) graphs
 $CONFIG['graph_type'] = 'png';
@@ -58,7 +60,7 @@ $CONFIG['negative_io'] = false;
 
 # add XXth percentile line + legend to network graphs
 # false = disabled; 95 = 95th percentile
-$CONFIG['percentile'] = false;
+$CONFIG['percentile'] = 95;
 
 # create smooth graphs (rrdtool -E)
 $CONFIG['graph_smooth'] = false;
